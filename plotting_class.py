@@ -1,7 +1,7 @@
 import h5py 
 import matplotlib.pyplot as plt 
 import seaborn as sns
-from metrics import Metrics
+from metrics_class import Metrics
 import numpy as np
 import pandas as pd
 
@@ -48,7 +48,7 @@ class Plot_obj(Metrics):
         if len(self.selected_cycles)>1:
             ax.vlines(x=self._cycles_lengths[0], ymin=plot_data.min(), ymax=plot_data.max(), colors='r', linestyles='dashed')
             for c in range(1, len(self._cycles_lengths[1:-1])+1):
-                ax.vlines(x=self._cycles_lengths[c-1]+self._cycles_lengths[c], ymin=plot_data.min(), ymax=plot_data.max(), colors='r', linestyles='dashed')
+                ax.vlines(x=sum(self._cycles_lengths[:c+1]), ymin=plot_data.min(), ymax=plot_data.max(), colors='r', linestyles='dashed')
         ax.set_ylabel(vector)
         ax.set_xlabel("Time")
         plt.show()
